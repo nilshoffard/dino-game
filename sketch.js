@@ -30,10 +30,9 @@ function draw() {
         if (random(1) < 0.75){
             obstacles.push(new Spike());
         } else {
-            obstacles.push(new Egg());
+            eggs.push(new Egg());
         }
     }
-    
     
     
     
@@ -43,7 +42,11 @@ function draw() {
 
     for (let o of obstacles) {
        o.move();
-       o.show(); 
+       o.show();
+       if (dino.hits(o)) {
+        console.log('game over');
+        // noLoop();
+       } 
     }
     
     for (let e of eggs) {

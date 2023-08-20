@@ -1,6 +1,6 @@
 class Dino{
    constructor() {
-    this.r = 100;
+    this.r = 75;
     this.x = this.r;
     this.y = height - this.r - 50;
     this.vy = 0;
@@ -17,6 +17,11 @@ class Dino{
       }
    }
 
+   hits(obstacles) {
+      return collideRectRect(this.x, this.y, this.r, this.r, obstacles.x, obstacles.y, obstacles.r, obstacles.r);
+   }  
+    
+
    move() {
       this.y += this.vy;
       this.y =constrain(this.y,0,height - this.r);
@@ -28,6 +33,8 @@ class Dino{
    }
 
    show() {
-        image(dImg,this.x, this.y, this.r, this.r);
+         image(dImg,this.x, this.y, this.r, this.r);
+         fill(255,50);
+         rect(this.x, this.y, this.r, this.r);
    }
 }
