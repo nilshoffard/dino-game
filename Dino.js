@@ -4,16 +4,16 @@ class Dino{
     this.x = this.r;
     this.y = height - this.r - 50;
     this.vy = 0;
-    this.gravity = 2;
+    this.gravity = 0.5;
    }
 
    isOnGround() {
-      return this.y == height - this.r - 50
+      return this.y >= height - this.r - 50
    }
    
    jump() {
       if (this.isOnGround()) {
-         this.vy = -25;
+         this.vy = -15;
       }
    }
 

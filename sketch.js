@@ -26,13 +26,14 @@ function keyPressed() {
 }
 
 function draw() {
-    if (random(1) < 0.01) {
-        obstacles.push(new Spike());
+    if (random(1) < 0.005) {
+        if (random(1) < 0.75){
+            obstacles.push(new Spike());
+        } else {
+            obstacles.push(new Egg());
+        }
     }
     
-    if (random(1) < 0.01) {
-        obstacles.push(new Egg());
-    }
     
     
     
