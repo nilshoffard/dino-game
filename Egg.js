@@ -13,4 +13,5 @@ class Egg {
     show() {
         image(eImg, this.x, this.y, this.r, this.r);
     }
+    
 }

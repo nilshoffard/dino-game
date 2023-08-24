@@ -4,7 +4,7 @@ class Dino{
     this.x = this.r;
     this.y = height - this.r - 50;
     this.vy = 0;
-    this.gravity = 0.5;
+    this.gravity = 1;
    }
 
    isOnGround() {
@@ -13,14 +13,17 @@ class Dino{
    
    jump() {
       if (this.isOnGround()) {
-         this.vy = -15;
+         this.vy = -20;
       }
    }
 
    hits(obstacles) {
-      return collideRectRect(this.x, this.y, this.r, this.r, obstacles.x, obstacles.y, obstacles.r, obstacles.r);
+      return collideRectRect(this.x, this.y, this.r, this.r, obstacles.x + ((obstacles.r * 1)/4), obstacles.y, obstacles.r/2, obstacles.r);
    }  
-    
+   
+   collects(eggs) {
+      return collideRectRect(this.x, this.y, this.r, this.r, eggs.x, eggs.y, eggs.r, eggs.r);
+   }
 
    move() {
       this.y += this.vy;
@@ -34,7 +37,12 @@ class Dino{
 
    show() {
          image(dImg,this.x, this.y, this.r, this.r);
-         fill(255,50);
-         rect(this.x, this.y, this.r, this.r);
+         
+         // rect(this.x, this.y, this.r, this.r);
+   }
+
+   hide() {
+      fill(255,50);
+      image(dImg,this.x, this.y, this.r, this.r);
    }
 }
