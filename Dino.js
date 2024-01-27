@@ -37,8 +37,8 @@ class Dino{
 
    show() {
          image(dImg,this.x, this.y, this.r, this.r);
-         
-         // rect(this.x, this.y, this.r, this.r);
+         fill(255,50);
+         rect(this.x, this.y + (this.r/6), this.r, this.r *2/3);
    }
 
    hide() {

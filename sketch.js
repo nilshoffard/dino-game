@@ -8,6 +8,7 @@ let GraceMode = false;
 let GraceCount = 0;
 let obstacles = [];
 let eggs = [];
+let gameStarted = false;
 
 function preload () {
     dImg = loadImage('Pictures/dino.png')
@@ -19,71 +20,90 @@ function preload () {
 function setup() {
     createCanvas(600,450);
     dino = new Dino();
+    fill(0);
+    text("Press Enter", 175, 225);
     
 }
+
 
 function keyPressed() {
-    if (key == ' ') {
-       dino.jump(); 
+    if (keyCode == ENTER) {
+       gameStarted = true; 
     }
+    if (key == ' ') {
+        dino.jump(); 
+     }
 }
 
+
+
 function draw() {
-    GraceCount++;
-    if (GraceCount > 180) {
-        GraceMode = false;
-    }
-    // console.log(GraceMode)
-    if (frameCount % 60 == 0) {
-        if (random(1) < 0.9){
-            obstacles.push(new Spike());
-        } else {
-            eggs.push(new Egg());
+    if (gameStarted) {
+        GraceCount++;
+        if (GraceCount > 180) {
+            GraceMode = false;
         }
-    }
-    
-    background(bImg);
-    textSize(20);
-    text("LIVES:", 10, 20);
-    textSize(20);
-    text(lives, 80, 20);
-
-    if (!GraceMode){
-        dino.show();
-    }
-    
-    
-    dino.move();
-
-    for (let o of obstacles) {
-       o.move();
-       o.show();
-       if (dino.hits(o)) {
-        if (!GraceMode) {
-            GraceMode = true
-            lives--;
-            GraceCount = 0;
-        } 
+        // console.log(GraceMode)
+        if (frameCount % 60 == 0) {
+            if (random(1) < 0.9){
+                obstacles.push(new Spike());
+            } else {
+                eggs.push(new Egg());
+            }
+        }
         
-        // noLoop();
-       }
-    }
-    
-    if (GraceMode) {
-        if (frameCount % 60 < 30) {
-            dino.hide();
-        }
-    }
+        background(bImg);
+        fill(0);
+        textSize(20);
+        text("LIVES:", 10, 20);
+        fill(0);
+        textSize(20);
+        text(lives, 80, 20);
 
-    let idx = 0;
-    for (let e of eggs) {
-       e.move();
-       e.show();
-       if (dino.collects(e)) {
-        eggs.splice(idx, 1)
-        lives++;
-        break
-       }
-       idx++;
+        if (!GraceMode){
+            dino.show();
+        }
+        
+        
+        dino.move();
+
+        for (let o of obstacles) {
+        o.move();
+        o.show();
+        if (dino.hits(o)) {
+            if (!GraceMode) {
+                GraceMode = true
+                lives--;
+                GraceCount = 0;
+            } 
+            
+
+        }
+        }
+        
+        if (GraceMode) {
+            if (frameCount % 60 < 30) {
+                dino.hide();
+            }
+        }
+
+        let idx = 0;
+        for (let e of eggs) {
+        e.move();
+        e.show();
+        if (dino.collects(e)) {
+            eggs.splice(idx, 1)
+            lives++;
+            break
+        }
+        idx++;
+        }
+
+        if (lives <= 0) {
+            textSize(50);
+            fill(0);
+            text("Game over", 175, 225);
+            noLoop();
+        }
     }
 }
