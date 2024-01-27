@@ -18,11 +18,11 @@ class Dino{
    }
 
    hits(obstacles) {
-      return collideRectRect(this.x, this.y, this.r, this.r, obstacles.x + ((obstacles.r * 1)/4), obstacles.y, obstacles.r/2, obstacles.r);
+      return collideRectRect(this.x, this.y, this.r, this.r*2/3, obstacles.x + ((obstacles.r * 1)/4), obstacles.y, obstacles.r/2, obstacles.r);
    }  
    
    collects(eggs) {
-      return collideRectRect(this.x, this.y, this.r, this.r, eggs.x, eggs.y, eggs.r, eggs.r);
+      return collideRectRect(this.x, this.y, this.r, this.r*2/3, eggs.x, eggs.y, eggs.r, eggs.r);
    }
 
    move() {
@@ -37,8 +37,9 @@ class Dino{
 
    show() {
          image(dImg,this.x, this.y, this.r, this.r);
-         fill(255,50);
-         rect(this.x, this.y + (this.r/6), this.r, this.r *2/3);
+         // fill(255,50);
+         // rect(this.x, this.y + (this.r/6), this.r, this.r);
+         // rect(this.x, this.y + (this.r/6), this.r, this.r *2/3);
    }
 
    hide() {

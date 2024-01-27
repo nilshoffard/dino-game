@@ -4,6 +4,7 @@ let sImg;
 let eImg;
 let bImg;
 let lives = 1;
+let score = 0;
 let GraceMode = false;
 let GraceCount = 0;
 let obstacles = [];
@@ -59,6 +60,10 @@ function draw() {
         fill(0);
         textSize(20);
         text(lives, 80, 20);
+        textSize(20);
+        text("Score:", 480, 20);
+        textSize(20);
+        text(score, 540, 20);
 
         if (!GraceMode){
             dino.show();
@@ -86,6 +91,9 @@ function draw() {
                 dino.hide();
             }
         }
+        if (frameCount % 60 == 0) {
+            score++;
+        }
 
         let idx = 0;
         for (let e of eggs) {
@@ -94,6 +102,7 @@ function draw() {
         if (dino.collects(e)) {
             eggs.splice(idx, 1)
             lives++;
+            score = score+10;
             break
         }
         idx++;
@@ -103,6 +112,10 @@ function draw() {
             textSize(50);
             fill(0);
             text("Game over", 175, 225);
+            textSize(25);
+            fill(0);
+            text("Your score is:", 195, 265);
+            text(score, 360, 265);
             noLoop();
         }
     }
